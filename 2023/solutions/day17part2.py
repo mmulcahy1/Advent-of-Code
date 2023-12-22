@@ -20,22 +20,18 @@ def getNeighbors(point, direction):
         heatLoss = 0
         if d == 'up':
             for i in range(4, min(11, point[1]+1)):
-                heatLoss += int(lines[point[1]-i][point[0]])
                 neighbors.append(((point[0], point[1]-i), d, i))
         
         elif d == 'down':
             for i in range(4, min(11, rowLen-point[1])):
-                heatLoss += int(lines[point[1]+i][point[0]])
                 neighbors.append(((point[0], point[1]+i), d, i))
         
         elif d == 'right':
             for i in range(4, min(11, colLen-point[0])):
-                heatLoss += int(lines[point[1]][point[0]+i])
                 neighbors.append(((point[0]+i, point[1]), d, i))
         
         elif d == 'left':
             for i in range(4, min(11, point[0]+1)):
-                heatLoss += int(lines[point[1]][point[0]-i])
                 neighbors.append(((point[0]-i, point[1]), d, i))
             
     return neighbors
