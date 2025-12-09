@@ -13,7 +13,7 @@ circuit_sizes = {}
 circuit_number = 0
 
 # if sample use 10, real input use 1000
-connections = 1000 
+connections = 1000
 
 for i, line in enumerate(lines):
     junction_box = line
@@ -37,7 +37,7 @@ for i, line in enumerate(lines):
 heapq.heapify(distances)
 #breakpoint()
 j = 0
-while j < connections:
+while len(circuit_sizes) > 1:
     
     shortest_distance = heapq.heappop(distances)
     first_box = shortest_distance[1].split('-')[0]
@@ -58,14 +58,19 @@ while j < connections:
         del circuit_sizes[added_circuit]
     
     j += 1
+    if j == connections:
+        three_largest_circuits = heapq.nlargest(3, circuit_sizes, key=circuit_sizes.get)
+        part_1_solution = math.prod([circuit_sizes[i] for i in three_largest_circuits])
+        
+part_2_solution = int(first_box.split(',')[0]) * int(second_box.split(',')[0])
         
 #print(circuits_to_boxes)
 #print(circuit_sizes)     
 #print(boxes_to_circuits)   
-three_largest_circuits = heapq.nlargest(3, circuit_sizes, key=circuit_sizes.get)
-part_1_solution = math.prod([circuit_sizes[i] for i in three_largest_circuits])
+
 #print(three_largest_circuits)
 print(part_1_solution)
+print(part_2_solution)
         
         
         
